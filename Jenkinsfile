@@ -9,13 +9,15 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building ${env.APP_NAME}..."
+                // התקנת pytest כדי לוודא שהוא קיים בשרת
+                bat 'C:\\Python312\\python.exe -m pip install pytest'
             }
         }
         stage('Test') {
             steps {
                 echo "Running Tests..."
-                // שינינו מ-sh ל-bat עבור מערכת הפעלה Windows
-               bat 'C:\\Python312\\python.exe -m pytest --junitxml=results.xml'
+                // הרצת הבדיקות
+                bat 'C:\\Python312\\python.exe -m pytest --junitxml=results.xml'
             }
         }
         stage('Deploy') {
@@ -27,6 +29,7 @@ pipeline {
 
     post {
         always {
+            // יצירת הדו"ח הגרפי
             junit 'results.xml'
         }
     }
