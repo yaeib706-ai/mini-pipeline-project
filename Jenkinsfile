@@ -1,35 +1,34 @@
 pipeline {
-    agent any [cite: 29]
+    agent any
 
     environment {
-        APP_NAME = 'ToyStore' [cite: 58]
+        APP_NAME = 'Toy Store'
     }
 
     stages {
-        stage('Build') { [cite: 56]
+        stage('Build') {
             steps {
-                echo 'Building the application...' [cite: 35]
+                echo "Building ${env.APP_NAME}..."
             }
         }
-
-        stage('Test') { [cite: 56]
+        stage('Test') {
             steps {
-                // הרצת הבדיקות ויצירת דוח XML
-                sh 'pytest --junitxml=results.xml' [cite: 74, 75]
+                echo "Running Tests..."
+                // הרצת הבדיקות ויצירת דוח XML כפי שמוסבר במצגת
+                sh 'pytest --junitxml=results.xml'
             }
         }
-
-        stage('Deploy') { [cite: 56]
+        stage('Deploy') {
             steps {
-                echo 'Deploying to store inventory...' [cite: 44]
+                echo "Deploying to Production..."
             }
         }
     }
 
-    post { [cite: 60]
+    post {
         always {
-            // הצגת תוצאות הבדיקות בממשק Jenkins
-            junit 'results.xml' [cite: 76, 77]
+            // הצגת תוצאות הבדיקות בממשק ה-JUnit של ג'נקינס
+            junit 'results.xml'
         }
     }
 }
