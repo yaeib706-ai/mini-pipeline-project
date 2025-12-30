@@ -1,6 +1,5 @@
 import pytest
-from inventory import check_toy_inventory, add_toy_to_store
-
+from main import check_toy_inventory, add_toy_to_store
 def test_check_toy_exists():
     inventory = ["Robot", "Doll", "Car"]
     assert check_toy_inventory("Robot", inventory) == True
