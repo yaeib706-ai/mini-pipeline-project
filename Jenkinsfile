@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo "Running Tests..."
                 // שינינו מ-sh ל-bat עבור מערכת הפעלה Windows
-                bat 'pytest --junitxml=results.xml'
+               bat 'C:\\Python312\\python.exe -m pytest --junitxml=results.xml'
             }
         }
         stage('Deploy') {
